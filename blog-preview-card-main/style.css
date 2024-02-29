@@ -1,19 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
+
+* {
+    font-family: 'Figtree';
+    margin: 0;
+    padding: 0;
+}
+
 body {
     padding: 0;
     margin: 0;
 }
 
+:root {
+    --default-background-color:hsl(47, 88%, 63%); 
+    --default-font-family: 'Figtree';
+}
+
+.attribution {
+    background-color: var(--default-background-color);
+}
+
 .container {
     display: grid;
-    height: 100vh;
+    height: 99vh;
     width: 100vw;
-    background-color: hsl(47, 88%, 63%);
+    background-color: var(--default-background-color);
     place-items: center;
 }
 
 .main {
     border: 1px solid #000;
     background-color: #fff;
-    height: 50vh;
-    width: 50vw;
+    border-radius: 12px;
+    height: 45vh;
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+    box-shadow: 5px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+#main-img {
+    width: 40vw;
+    height: 25vh;
+    border-radius: 16px;
+    background-image: url(./assets/images/illustration-article.svg);
+    background-repeat: no-repeat;
+    background-size: cover; 
+    background-position: center;
+}
+
+#tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 30px;
+    margin: 4%;
+    font-weight: bold;
+    border: none; 
+    border-radius: 4px;
+    background-color: var(--default-background-color);
+}
+
+#title {
+    margin: 4%;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+#date {
+    margin: 4%;
+}
+
+#para {
+    margin: 4%;
+}
+
+#profile {
+    height: 20px;
+    width: 20px;
+}
+
+#profile-div {
+    margin: 4%;
+    display: flex;
+    align-items: center;
+}
+
+#profile-div img{
+    height: 30px;
+    width: 30px;
+}
+
+#name {
+    margin-left: 2%;
+}
+
+@media screen {
+    
 }
