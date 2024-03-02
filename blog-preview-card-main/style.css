@@ -79,6 +79,11 @@ body {
     font-weight: 900;
 }
 
+#title:hover {
+    color: var(--default-background-color);
+    cursor: pointer;
+}
+
 #date {
     display: flex;
     align-items: center;
