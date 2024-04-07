@@ -1,136 +1,100 @@
-@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
-
-* {
-    font-family: 'Figtree';
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+@import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap");
 
 body {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  background-color: var(--default-background-color);
+  place-items: center;
+}
+
+* {
+  font-family: "Figtree", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
-    --default-background-color:hsl(47, 88%, 63%); 
-    --default-font-family: 'Figtree';
+  --default-background-color: hsl(47, 88%, 63%);
+  --default-font-family: "Figtree";
+  --grey-font-color: hsl(0, 0%, 50%);
 }
 
-.attribution {
-    grid-row: 2 / 2;
-    background-color: var(--default-background-color);
+main {
+  border: 1.5px solid #000;
+  background-color: #fff;
+  border-radius: 0.75rem;
+  height: 31.25rem;
+  max-width: 90%;
+  width: 22.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 5);
+  padding: 1rem;
 }
 
-.container {
-    display: grid;
-    height: 100vh;
-    width: 100vw;
-    background-color: var(--default-background-color);
-    place-items: center;
-    grid-template-rows: 99fr 1fr;
-    overflow: hidden;
+main img {
+  border-radius: 0.625rem;
 }
 
-.main {
-    grid-row: 1 / 1;
-    border: 1.5px solid #000;
-    background-color: #fff;
-    border-radius: 12px;
-    height: 520px;
-    width: 380px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 5);
-    padding: 1.2rem;
+h2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6rem;
+  height: 1.875rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--default-background-color);
+  font-weight: 800;
 }
 
-#main-img {
-    width: auto;
-    height: 25vh;
-    border-radius: 16px;
-    background-image: url(./assets/images/illustration-article.svg);
-    background-repeat: no-repeat;
-    background-size: cover; 
-    background-position: center;
+h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
 }
 
-#tag {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-    width: 80px;
-    height: 40px;
-    font-size: 14px;
-    font-weight: 900;
-    border: none; 
-    border-radius: 4px;
-    background-color: var(--default-background-color);
+h1:hover {
+  color: var(--default-background-color);
+  cursor: pointer;
 }
 
-#title {
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-    font-size: 24px;
-    font-weight: 900;
+h3 {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
-#title:hover {
-    color: var(--default-background-color);
-    cursor: pointer;
+p {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--grey-font-color);
+  line-height: 1.5;
 }
 
-#date {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    font-weight: 500;
+.profile-div {
+  display: flex;
+  align-items: center;
 }
 
-#para {
-    margin-bottom: 1vh;
-    font-size: 16px;
-    font-weight: 400;
+.profile-div img {
+  margin-right: 0.625rem;
+  height: 2rem;
 }
 
-#profile {
-    height: 20px;
-    width: 20px;
+.profile-div h4 {
+  font-size: 1rem;
+  font-weight: 900;
 }
 
-#profile-div {
-    display: flex;
-    align-items: center;
-}
-
-#profile-div img{
-    margin-right: 2%;
-    height: 30px;
-    width: 30px;
-}
-
-#name {
-    margin-top: 1.4vh;
-    margin-bottom: 1vh;
-    font-size: 14px;
-    font-weight: 900;
-}
-
-@media screen and (max-width: 375px){  
-    .main {
-        display: grid;
-        grid-template-rows: repeat(6, auto);
-        width: 85vw;
-        height: 75vh;
-        max-width: 85vw;
-        max-height: 75vh;
-    }
-    #title {
-        font-size: 1.2rem;
-    }
-    #tag {
-        height: 5vh;
-    }
+@media screen and (width < 23.4375rem) {
+  main {
+    width: 80vw;
+  }
 }
