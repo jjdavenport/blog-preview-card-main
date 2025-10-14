@@ -1,5 +1,6 @@
 import avatar from "../assets/image-avatar.webp";
 import article from "../assets/illustration-article.svg";
+import { useState } from "react";
 
 export const Footer = () => {
   return (
@@ -43,14 +44,19 @@ export const Container = ({ children }: { children: React.ReactNode }) => {
 };
 
 export const Main = () => {
+  const [loaded, setLoaded] = useState(false);
   return (
     <>
       <main className="drop-shadow-card flex h-[31.3125rem] w-[20.4375rem] flex-col gap-6 rounded-[1.25rem] border border-black bg-white p-6 md:h-[32.625rem] md:w-96">
-        <img
-          className="h-[12.5rem] w-[17.4375rem] rounded-[0.625rem] object-cover md:w-auto"
-          src={article}
-          alt="card"
-        />
+        <div
+          className={`bg-yellow h-[12.5rem] w-[17.4375rem] overflow-hidden rounded-[0.625rem] md:w-auto`}
+        >
+          <img
+            className="h-[12.5rem] w-[17.4375rem] rounded-[0.625rem] object-cover md:w-auto"
+            src={article}
+            alt="card"
+          />
+        </div>
         <div className="flex w-[17.4375rem] flex-col gap-3 md:w-auto">
           <div className="bg-yellow flex h-[1.625rem] w-[4.5rem] items-center justify-center rounded-sm px-3 py-1 md:h-auto md:w-fit">
             <h2 className="text-xs leading-[150%] font-extrabold md:text-sm">
@@ -69,7 +75,16 @@ export const Main = () => {
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <img className="size-8 object-contain" src={avatar} alt="card" />
+          <div
+            className={`${loaded ? "animate-none bg-transparent" : "bg-grey animate-pulse"} size-8 overflow-hidden rounded-full`}
+          >
+            <img
+              onLoad={() => setLoaded(true)}
+              className={`${loaded ? "opacity-100" : "opacity-0"} size-8 object-contain transition-opacity duration-500`}
+              src={avatar}
+              alt="card"
+            />
+          </div>
           <h4 className="text-sm font-bold tracking-normal text-black">
             Greg Hooper
           </h4>
