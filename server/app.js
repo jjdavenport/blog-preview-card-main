@@ -1,72 +1,51 @@
-import fs from "node:fs/promises";
 import express from "express";
+import { createServer as createViteServer } from "vite";
+import fs from "node:fs";
+import path from "node:path";
 
-// Constants
-const isProduction = process.env.NODE_ENV === "production";
-const port = process.env.PORT || 5173;
-const base = process.env.BASE || "/";
+async function createServer() {
+  const app = express();
 
-// Cached production assets
-const templateHtml = isProduction
-  ? await fs.readFile("../client/dist/client/index.html", "utf-8")
-  : "";
-
-// Create http server
-const app = express();
-
-// Add Vite or respective production middlewares
-/** @type {import('vite').ViteDevServer | undefined} */
-let vite;
-if (!isProduction) {
-  const { createServer } = await import("vite");
-  vite = await createServer({
-    server: { middlewareMode: true },
+  // Create vite server in middleware mode
+  const vite = await createViteServer({
+    server: { middlewareMode: "ssr" },
     appType: "custom",
-    base,
   });
   app.use(vite.middlewares);
-} else {
-  const compression = (await import("compression")).default;
-  const sirv = (await import("sirv")).default;
-  app.use(compression());
-  app.use(base, sirv("../client/dist", { extensions: [] }));
+
+  app.use("*all", async (req, res, next) => {
+    try {
+      const url = req.originalUrl;
+
+      // Read index.html
+      let template = fs.readFileSync(
+        path.resolve("../client/dist/client/index.html"),
+        "utf-8"
+      );
+
+      // Apply Vite HTML transforms
+      template = await vite.transformIndexHtml(url, template);
+
+      // Load server entry module that exports the render function
+      const { render } = await vite.ssrLoadModule(
+        "../client/dist/server/entry-server.js"
+      );
+
+      // Render app HTML
+      const appHtml = await render(url);
+
+      // Inject the rendered app HTML into template
+      const html = template.replace(`<!--ssr-outlet-->`, appHtml);
+
+      res.status(200).set({ "Content-Type": "text/html" }).end(html);
+    } catch (e) {
+      vite.ssrFixStacktrace(e);
+      next(e);
+    }
+  });
+
+  app.listen(5000);
+  console.log("Server running at http://localhost:5000");
 }
 
-// Serve HTML
-app.use("*all", async (req, res) => {
-  try {
-    const url = req.originalUrl.replace(base, "");
-
-    /** @type {string} */
-    let template;
-    /** @type {import('./src/entry-server.ts').render} */
-    let render;
-    if (!isProduction) {
-      // Always read fresh template in development
-      template = await fs.readFile("../client/index.html", "utf-8");
-      template = await vite.transformIndexHtml(url, template);
-      render = (await vite.ssrLoadModule("../client/src/entry-server.tsx"))
-        .render;
-    } else {
-      template = templateHtml;
-      render = (await import("../client/src/entry-server.tsx")).render;
-    }
-
-    const rendered = await render(url);
-
-    const html = template
-      .replace(`<!--app-head-->`, rendered.head ?? "")
-      .replace(`<!--app-html-->`, rendered.html ?? "");
-
-    res.status(200).set({ "Content-Type": "text/html" }).send(html);
-  } catch (e) {
-    vite?.ssrFixStacktrace(e);
-    console.log(e.stack);
-    res.status(500).end(e.stack);
-  }
-});
-
-// Start http server
-app.listen(port, () => {
-  console.log(`Server started at http://localhost:${port}`);
-});
+createServer();
