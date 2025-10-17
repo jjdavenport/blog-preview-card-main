@@ -11,7 +11,9 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "compression": "^1.8.1",
     "express": "^5.1.0",
+    "sirv": "^3.0.2",
     "vite": "^7.1.10"
   }
 }
