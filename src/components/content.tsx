@@ -59,16 +59,16 @@ export const Main = () => {
         </div>
         <div className="flex w-[17.4375rem] flex-col gap-3 md:w-auto">
           <div className="bg-yellow flex h-[1.625rem] w-[4.5rem] items-center justify-center rounded-sm px-3 py-1 md:h-auto md:w-fit">
-            <h2 className="text-xs leading-[150%] font-extrabold md:text-sm">
+            <h1 className="text-xs leading-[150%] font-extrabold md:text-sm">
               Learning
-            </h2>
+            </h1>
           </div>
-          <h3 className="text-xs leading-[150%] font-medium tracking-normal text-black md:text-sm">
+          <h2 className="text-xs leading-[150%] font-medium tracking-normal text-black md:text-sm">
             Published 29 Feb 2024
-          </h3>
-          <h1 className="hover:text-yellow cursor-pointer text-xl font-extrabold tracking-normal text-black transition-colors md:text-2xl">
+          </h2>
+          <h3 className="hover:text-yellow cursor-pointer text-xl font-extrabold tracking-normal text-black transition-colors md:text-2xl">
             HTML & CSS foundations
-          </h1>
+          </h3>
           <p className="text-grey text-sm leading-[150%] font-medium tracking-normal md:text-base">
             These languages are the backbone of every website, defining
             structure, content and presentation.
@@ -82,7 +82,7 @@ export const Main = () => {
               onLoad={() => setLoaded(true)}
               className={`${loaded ? "opacity-100" : "opacity-0"} size-8 object-contain transition-opacity duration-500`}
               src={avatar}
-              alt="card"
+              alt="profile picture"
             />
           </div>
           <h4 className="text-sm font-bold tracking-normal text-black">
