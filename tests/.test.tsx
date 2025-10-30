@@ -1,11 +1,11 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, beforeEach } from "vitest";
 import "@testing-library/jest-dom";
-import App from "../src/App";
+import Home from "../src/app/page";
 
 describe("Renders the app", () => {
   beforeEach(() => {
-    render(<App />);
+    render(<Home />);
   });
 
   it("shows the main article title", () => {

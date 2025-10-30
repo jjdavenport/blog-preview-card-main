@@ -1,5 +1,8 @@
+"use client";
+
 import avatar from "../assets/image-avatar.webp";
 import article from "../assets/illustration-article.svg";
+import Image from "next/image";
 import { useState } from "react";
 
 export const Footer = () => {
@@ -51,7 +54,8 @@ export const Main = () => {
         <div
           className={`bg-yellow h-[12.5rem] w-[17.4375rem] overflow-hidden rounded-[0.625rem] md:w-auto`}
         >
-          <img
+          <Image
+            loading="eager"
             className="h-[12.5rem] w-[17.4375rem] rounded-[0.625rem] object-cover md:w-auto"
             src={article}
             alt="card"
@@ -78,7 +82,8 @@ export const Main = () => {
           <div
             className={`${loaded ? "animate-none bg-transparent" : "bg-grey animate-pulse"} size-8 overflow-hidden rounded-full`}
           >
-            <img
+            <Image
+              loading="eager"
               onLoad={() => setLoaded(true)}
               className={`${loaded ? "opacity-100" : "opacity-0"} size-8 object-contain transition-opacity duration-500`}
               src={avatar}
