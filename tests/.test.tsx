@@ -54,19 +54,43 @@ describe("Renders the app", () => {
   });
 
   it("checks the main image has alt text", () => {
-    expect(screen.getByAltText("card")).toHaveAttribute("alt", "card");
+    expect(screen.queryByAltText("illustration")).toHaveAttribute(
+      "alt",
+      "illustration",
+    );
   });
 
-  it("checks two images are rendered", () => {
-    expect(screen.getAllByRole("img")).toHaveLength(2);
+  it("checks the main image has aria-hidden attribute is true", () => {
+    expect(screen.queryByAltText("illustration")).toHaveAttribute(
+      "aria-hidden",
+      "true",
+    );
   });
 
-  it("checks the image src", () => {
+  it("checks that two images are rendered", () => {
+    expect(screen.queryAllByRole("img")).toHaveLength(1);
+  });
+
+  it("checks the profile picture has alt text", () => {
+    expect(screen.getByAltText("profile picture")).toHaveAttribute(
+      "alt",
+      "profile picture",
+    );
+  });
+
+  it("checks the profile picture src", () => {
     const img = screen.getByAltText("profile picture");
     expect(img.src).toContain("image-avatar.webp");
   });
 
-  it("checks the github class", () => {
+  it("checks the profile pictures aria-hidden attribute is false", () => {
+    expect(screen.getByAltText("profile picture")).toHaveAttribute(
+      "aria-hidden",
+      "false",
+    );
+  });
+
+  it("checks the github link class", () => {
     expect(screen.getByText("jjdavenport")).toHaveAttribute(
       "class",
       "underline",
@@ -86,7 +110,7 @@ describe("Renders the app", () => {
     );
   });
 
-  it("checks the frontend mentor class", () => {
+  it("checks the frontend mentor link class", () => {
     expect(screen.getByText("Frontend Mentor")).toHaveAttribute(
       "class",
       "underline",
@@ -99,7 +123,7 @@ describe("Renders the app", () => {
     });
   });
 
-  it("checks the frontend mentor href", () => {
+  it("checks the frontend mentor link href", () => {
     expect(screen.getByText("Frontend Mentor")).toHaveAttribute(
       "href",
       "https://www.frontendmentor.io?ref=challenge",

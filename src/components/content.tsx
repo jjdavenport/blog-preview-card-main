@@ -52,9 +52,10 @@ export const Main = () => {
           className={`bg-yellow h-[12.5rem] w-[17.4375rem] overflow-hidden rounded-[0.625rem] md:w-auto`}
         >
           <img
+            aria-hidden="true"
             className="h-[12.5rem] w-[17.4375rem] rounded-[0.625rem] object-cover md:w-auto"
             src={article}
-            alt="card"
+            alt="illustration"
           />
         </div>
         <div className="flex w-[17.4375rem] flex-col gap-3 md:w-auto">
@@ -79,6 +80,7 @@ export const Main = () => {
             className={`${loaded ? "animate-none bg-transparent" : "bg-grey animate-pulse"} size-8 overflow-hidden rounded-full`}
           >
             <img
+              aria-hidden="false"
               onLoad={() => setLoaded(true)}
               className={`${loaded ? "opacity-100" : "opacity-0"} size-8 object-contain transition-opacity duration-500`}
               src={avatar}
